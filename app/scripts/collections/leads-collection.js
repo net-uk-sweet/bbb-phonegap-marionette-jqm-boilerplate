@@ -16,7 +16,7 @@ function(App, Backbone, LeadModel) {
 	
 	'use strict';
 
-	var SQLResultList = Backbone.Collection.extend({
+	var LeadsList = Backbone.Collection.extend({
 
 		model: LeadModel,
 
@@ -52,6 +52,6 @@ function(App, Backbone, LeadModel) {
 		},
 	});
 
-	return SQLResultList;
+	return LeadsList;
 
 });

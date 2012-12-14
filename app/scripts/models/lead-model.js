@@ -13,9 +13,11 @@ function(App, Backbone) {
 
 	var LeadModel = Backbone.Model.extend({
 
-		// Probably don't need to define defaults, but it's
-		// useful at this stage to visualise how the model will look
+		// Don't want defaults when we get going, but it's handy
+		// at this stage to visualise how the model will look
 		defaults: {
+			eventId: '123456', // Events will be maintained until user synchs
+			selections: [ /* array or collection of Selection models */ ],
 			title: 'Mr.',
 			firstName: 'John',
 			lastName: 'Doe',
@@ -29,13 +31,11 @@ function(App, Backbone) {
 			email: 'j.doe@notarealperson.com',
 			replaceDate: '19.09.2013',
 			currentVehicle: 'Citreon Picasso',
-			considering: ['Sherman tank', 'Hummer'],
-			whyLexus: 'Styling'
-		},
-
-		test: function() {
-			console.log("Test:", this.id);
+			otherVehicles: ['Sherman tank', 'Hummer'],
+			whyLexus: 'Styling',
+			complete: false
 		}
+		// TODO: if possible we should mirror naming used in CRM db
 	});
 
 	return LeadModel;

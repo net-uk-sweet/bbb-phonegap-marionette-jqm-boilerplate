@@ -8,7 +8,7 @@
 
         <link rel="stylesheet" href="styles/index.css"/>
     </head>
-    <body>
+    <body onload="onLoad()">
 
         <!-- Main container. -->
         <div role="main" id="main" class="container">
@@ -30,6 +30,11 @@
 
         <script src="scripts/libs/jquery.js"></script>
         <script type="text/javascript">
+
+
+            function onLoad() {
+                console.log("onLoad");
+            }
 
             // $(function() {
             //     console.log("document ready");

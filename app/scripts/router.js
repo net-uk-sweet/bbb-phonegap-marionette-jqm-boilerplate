@@ -6,8 +6,11 @@ define([
   //"models/result-model",
 
   // collections
-  //'collections/ls-result-collection',
-  'collections/sql-result-collection',
+  'collections/leads-collection',
+  'collections/selection-collection',
+
+  // models
+  'models/settings-model',
 
   // views
   'views/root-view',
@@ -16,7 +19,7 @@ define([
   'components/backbone-websql'
 ],
 
-function(app, SQLResultList, RootView) {
+function(app, LeadsList, SelectionList, SettingsModel, RootView) {
 
   'use strict';
 
@@ -24,14 +27,37 @@ function(app, SQLResultList, RootView) {
   var Router = Backbone.Router.extend({
     routes: {
       '': 'index',
-      'admin': 'admin'
+      'login': 'login',
+      'home': 'home',
+      'admin': 'admin',
+    },
+
+
+    login: function() {
+
+    },
+
+    home: function() {
+
     },
 
     index: function() {
+      
+      // // Create a collection for the model selection
+      // var selectionList = new SelectionList([
+      //   { id: 0, name: 'CT', strapline: 'Go Boldly', asset: 'images/ct.png'},
+      //   { id: 1, name: 'IS', strapline: 'Award winning sports saloon', asset: 'images/is.png'},
+      //   { id: 2, name: 'GS', strapline: 'A powerful change', asset: 'images/gs.png'},
+      //   { id: 3, name: 'RX', strapline: 'The pioneering SUV', asset: 'images/RX.png'}
+      // ]);
 
-      console.log('Router.index:');
+      // // Create a settings model
+      // var settingsModel = new SettingsModel();
 
-      var rootView = new RootView({ collection: new SQLResultList() });
+      // console.log('Router.index: cars: ' + selectionList.pluck('name'));
+      // console.log('Router.index: pin: ' + settingsModel.getSetting('pin'));
+
+      new RootView({ collection: new LeadsList() });
     },
 
     admin: function() {
