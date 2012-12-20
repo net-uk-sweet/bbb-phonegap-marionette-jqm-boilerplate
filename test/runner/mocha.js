@@ -9,10 +9,11 @@ require({
 }, [
 
 // Load specs
-'spec/example'
+'spec/lead-model'
 
 ], function() {
   'use strict';
+
 
   var runner = mocha.run();
 

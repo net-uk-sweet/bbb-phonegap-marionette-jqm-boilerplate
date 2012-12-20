@@ -8,64 +8,16 @@
 
         <link rel="stylesheet" href="styles/index.css"/>
     </head>
-    <body onload="onLoad()">
+    <body>
 
         <!-- Main container. -->
-        <div role="main" id="main" class="container">
-            <div id="form">
-                <input id="firstName" type="text" placeholder="First name" autofocus></input>
-                <br /><input id="lastName" type="text"placeholder="Last name"></input>
-                <br /><input id="email" type="email" placeholder="Email address"></input>
-                <br /><button id="submit">Submit</button>
-            </div>
-        <div id="leads"></div>
-        <hr />
-        <button id="delete">Delete</delete>
-        <button id="reset">Reset</button>
-        </div>
+        <div role="main" id="main"></div>
 
         <!-- Add your site or application content here -->
 
-        <!-- script src="scripts/cordova-2.2.0.js"></script -->
-
-        <script src="scripts/libs/jquery.js"></script>
-        <script type="text/javascript">
-
-
-            function onLoad() {
-                console.log("onLoad");
-            }
-
-            // $(function() {
-            //     console.log("document ready");
-            //     var db = openDatabase("todos", "", "Backbone-websql example", 1024*1024);
-            //     console.log(db);
-            // }); 
-
-            // Everything is fired twice in emulator! Once by Cordova and once by Ripple.
-            // How work on browser? Need to look into ripple more and mibbe Grunt?
-
-            //if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
-            //}
-
-            // Require and deviceReady don't play nicely together:
-            // https://github.com/blackberry/Ripple-UI/issues/354
-            // document.addEventListener('deviceready', function(){
-            //     (function(){
-            //         console.log("Writing require");
-            //         var a = document.createElement('script');
-            //         a.type = 'text/javascript';
-            //         a.setAttribute('data-main', 'scripts/config');
-            //         a.src = 'scripts/libs/require.js';
-            //         var s = document.getElementsByTagName('script')[0];
-            //         s.parentNode.insertBefore(a, s);
-            //     })();
-
-            // }, false);
-        </script>
-
+        <script type="text/javascript" src="scripts/libs/cordova-2.2.0.js"></script>
+        
         <!-- build:js scripts/amd-app.js -->
-        <!-- https://github.com/blackberry/Ripple-UI/issues/354 -->
         <script data-main="scripts/config" src="scripts/libs/require.js"></script>
         <!-- endbuild -->
     </body>
