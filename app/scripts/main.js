@@ -22,11 +22,10 @@ function($, domReady, App, router) {
     //console.log("Main.domReady");
 
     function onDeviceReady(/*desktop*/) {
-
-      console.log('onDeviceReady: creating apps'/*, App */);
+      console.log('Main.onDeviceReady: creating app'/*, App */);
       App.Router = router;
       App.start();
-      console.log('After app');
+      console.log('Main.onDeviceReady: created app');
       // console.log('App.Router' + App.Router);
     }
 

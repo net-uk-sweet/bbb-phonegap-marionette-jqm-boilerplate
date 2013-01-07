@@ -751,7 +751,9 @@ _.extend(Marionette.Callbacks.prototype, {
   // Additional callbacks can be added after this has been run 
   // and they will still be executed.
   run: function(options, context){
+    //console.log('Marionette.Callbacks.run: ' + this._deffered);
     this._deferred.resolve(context, options);
+    //console.log('Marionette.Callbacks.run: after run');
   },
 
   // Resets the list of callbacks to be run, allowing the same list
@@ -1932,11 +1934,13 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
   // initializes all of the regions that have been added
   // to the app, and runs all of the initializer functions
   start: function(options){
+    console.log('Application.start:');
     this.triggerMethod("initialize:before", options);
     this.initCallbacks.run(options, this);
     this.triggerMethod("initialize:after", options);
-
+    console.log('Application.start: after init callbacks');
     this.triggerMethod("start", options);
+    console.log('Application.start: after trigger start');
   },
 
   // Add regions to your app. 

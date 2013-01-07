@@ -64,6 +64,10 @@ function($, _, Backbone, Marionette) {
     this.initAppEvents();
   });
 
+  App.on('initialize:before', function() {
+    console.log('App.initialize:before: ');
+  });
+
   App.on('initialize:after', function(){
     // Can't use push state on Xcode
     console.log('App.initialize: starting history');
