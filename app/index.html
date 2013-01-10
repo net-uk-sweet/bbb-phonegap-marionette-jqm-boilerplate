@@ -8,11 +8,22 @@
         <meta name="viewport" content="width=device-width"/>
 
         <link rel="stylesheet" href="styles/index.css"/>
+        <link rel="stylesheet" href="styles/jquery.mobile-1.2.0.css"/>
     </head>
     <body>
 
         <!-- Main container. -->
-        <div role="main" id="main">Hello world</div>
+        <div data-role="page">
+
+            <div data-role="header">
+                <h1>My Title</h1>
+            </div><!-- /header -->
+
+            <div id="content" data-role="content">   
+                <p>Hello world</p>      
+            </div><!-- /content -->
+
+        </div><!-- /page --> 
 
         <!-- for remote debugging with WEINRE -->
         <!-- script src="http://localhost:8080/target/target-script-min.js"></script -->
@@ -22,7 +33,7 @@
         <script type="text/javascript" src="scripts/libs/cordova-2.2.0.js"></script>
         
         <!-- 
-            NB. In the Ripple emulator (as recommended by PhoneGap) the following issues are apparent: 
+            NB. In the Ripple emulator (as recommended by PhoneGap) the following issues are evident: 
                 1. Require throws non-fatal exception (https://github.com/blackberry/Ripple-UI/issues/354)
                 2. onDeviceReady event is fired twice (http://supportforums.blackberry.com/t5/Ripple-Contributions/Onload-event-fires-twice-and-deviceready-does-not-fire-at-all/td-p/2003555) 
         -->

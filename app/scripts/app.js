@@ -23,7 +23,7 @@ function($, _, Backbone, Marionette, mainTemplate) {
 
   // Add the main region, that will hold the page layout.
   App.addRegions({
-    main: '#main'
+    main: '#content'
   });
 
   // Adds any methods to be run after the app was initialized.
