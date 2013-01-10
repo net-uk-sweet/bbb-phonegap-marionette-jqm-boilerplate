@@ -3,49 +3,17 @@ define([
   'jquery',
   'lodash',
   'backbone',
-  'marionette'
+  'marionette',
+
+  // Templates
+  'text!templates/main.html'
 ],
 
-// TODO: do we need to import Marionette?
-function($, _, Backbone, Marionette) {
+function($, _, Backbone, Marionette, mainTemplate) {
 
   'use strict';
 
 
-  /* =========================================================================
-   * The following will make Marionette's template retrieval work with
-   * in both development (templates found in html files) and production
-   * environment (templates all compiled AS JST templates into the require.js
-   * file. This will also use JST instead of the Marionette.TemplateCache.
-   */
-  Backbone.Marionette.Renderer.render = function(templateId, data) {
-    var path = 'templates/' + templateId + '.html';
-
-    // Localize or create a new JavaScript Template object.
-    var JST = window.JST = window.JST || {};
-
-    // Make a blocking ajax call (does not reduce performance in production,
-    // because templates will be contained by the require.js file).
-    if (!JST[path]) {
-      $.ajax({
-        url: App.root + path,
-        async: false
-      }).then(function(templateHtml) {
-        JST[path] = _.template(templateHtml);
-      });
-    }
-
-    if (!JST[path]) {
-      var msg = 'Could not find "' + templateId + '"';
-      var error = new Error(msg);
-      error.name = 'NoTemplateError';
-      throw error;
-    }
-
-    // Call the template function with the data.
-    return JST[path](data);
-  };
-  
   /* ======================================================================== */
 
   var App = new Backbone.Marionette.Application();
@@ -65,20 +33,19 @@ function($, _, Backbone, Marionette) {
   });
 
   App.on('initialize:before', function() {
-    console.log('App.initialize:before: ');
+    // console.log('App.initialize:before: ');
   });
 
   App.on('initialize:after', function(){
     // Can't use push state on Xcode
-    console.log('App.initialize: starting history');
-    Backbone.history.start({ pushState: true });
+    Backbone.history.start({ pushState: false });
   });
 
   // The main initializing function sets up the basic layout and its regions.
   App.initAppLayout = function() {
 
     var MainLayout = Backbone.Marionette.Layout.extend({
-      template: 'main',
+      template: _.template(mainTemplate),
       regions: {
         header: '#header',
         content: '#content',
@@ -110,6 +77,8 @@ function($, _, Backbone, Marionette) {
       //App.Result.set({ filters: e.get('filters') });
       //App.Router.navigate('wall/' + e.get('wallId'), { trigger: true });
     });
+
+    console.log('App.initAppEvents:');
   };
 
   return App;

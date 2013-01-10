@@ -1,18 +1,23 @@
 define([
 
+	// libs
+	'jquery',
+	'lodash',
+	'backbone',
+
 	'app',
 
-	// libs
-	'backbone'
+	// templates
+	'text!templates/lead.html'
 ],
 
-function(App, Backbone) {
+function($, _, Backbone, App, leadTemplate) {
 
 	'use strict';
 
 	var LeadView = Backbone.Marionette.ItemView.extend({
 
-		template: 'lead',
+		template: _.template(leadTemplate),
 
 		events: {
 			'click button': 'handleDelete'

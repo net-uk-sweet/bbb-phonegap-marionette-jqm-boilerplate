@@ -8,7 +8,7 @@ define([
   'app',
 
   // Main router
-  'router'
+  'router',
 ],
 
 function($, domReady, App, router) {
@@ -21,23 +21,22 @@ function($, domReady, App, router) {
 
     //console.log("Main.domReady");
 
-    function onDeviceReady(/*desktop*/) {
-      console.log('Main.onDeviceReady: creating app'/*, App */);
+    function onDeviceReady() {
+      start(true);
+    }
+
+    function start(isDevice) {
+      console.log('Main.start: running on a device: ' + isDevice);
       App.Router = router;
       App.start();
-      console.log('Main.onDeviceReady: created app');
-      // console.log('App.Router' + App.Router);
     }
 
     if (navigator.userAgent.match(/(iPad|iPhone|Android)/)) {
       // This is running on a device so waiting for deviceready event
-      // We won't see this statement in phonegap logs because device isn't ready
-      console.log('on a device (or phonegap)');
       document.addEventListener('deviceready', onDeviceReady, false);
     } else {
       // On desktop don't have to wait for anything
-      console.log('not on a device in the browser');
-      onDeviceReady(true);
+      start(false);
     }
   });
 });

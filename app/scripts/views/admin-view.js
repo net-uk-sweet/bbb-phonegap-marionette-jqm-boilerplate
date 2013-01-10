@@ -1,12 +1,14 @@
 define([
 
-	'app',
-
 	// libs
-	'backbone'
+	'jquery',
+	'lodash',
+	'backbone',
+
+	'app'
 ],
 
-function(App, Backbone) {
+function($, _, Backbone, App) {
 
 	'use strict';
 

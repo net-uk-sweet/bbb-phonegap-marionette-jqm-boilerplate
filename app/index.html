@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -7,21 +8,25 @@
         <meta name="viewport" content="width=device-width"/>
 
         <link rel="stylesheet" href="styles/index.css"/>
-
-        <script> console.log("hello world"); </script>
-
     </head>
     <body>
 
         <!-- Main container. -->
         <div role="main" id="main">Hello world</div>
 
-        <script src="http://localhost:8080/target/target-script-min.js"></script>
+        <!-- for remote debugging with WEINRE -->
+        <!-- script src="http://localhost:8080/target/target-script-min.js"></script -->
 
         <!-- Add your site or application content here -->
 
         <script type="text/javascript" src="scripts/libs/cordova-2.2.0.js"></script>
         
+        <!-- 
+            NB. In the Ripple emulator (as recommended by PhoneGap) the following issues are apparent: 
+                1. Require throws non-fatal exception (https://github.com/blackberry/Ripple-UI/issues/354)
+                2. onDeviceReady event is fired twice (http://supportforums.blackberry.com/t5/Ripple-Contributions/Onload-event-fires-twice-and-deviceready-does-not-fire-at-all/td-p/2003555) 
+        -->
+
         <!-- build:js scripts/amd-app.js -->
         <script data-main="scripts/config" src="scripts/libs/require.js"></script>
         <!-- endbuild -->

@@ -1,22 +1,27 @@
 define([
 
-	'app',
-
 	// libs
+	'jquery',
+	'lodash',
 	'backbone',
 
+	'app',
+
 	// Views
-	'views/leads-view'
+	'views/leads-view',
+
+	// Templates
+	'text!templates/login.html'
 ],
 
-function(App, Backbone, LeadsView) {
+function($, _, Backbone, App, LeadsView, loginTemplate) {
 
 	'use strict';
 
 	var LoginView = Backbone.Marionette.Layout.extend({
 
 		// Resolves to login.html in templates directory
-		template: 'login',
+		template: _.template(loginTemplate),
 
 		regions: {
 			// Subviews can target these regions of the template

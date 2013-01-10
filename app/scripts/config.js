@@ -14,21 +14,22 @@ require.config({
     jquery: '../scripts/libs/jquery',
     lodash: '../scripts/libs/lodash',
     backbone: '../scripts/libs/backbone',
-    marionette: '../scripts/libs/backbone.marionette'
+    marionette: '../scripts/libs/backbone.marionette',
+    text: '../scripts/libs/text' // this compiles our templates
   },
 
   shim: {
-
-    // Marionette depends on backbone
-    marionette: {
-      deps: ['backbone'],
-      exports: 'Backbone.Marionette'
-    },
 
     // Backbone library depends on lodash and jQuery.
     backbone: {
       deps: ['lodash', 'jquery'],
       exports: 'Backbone'
+    },
+
+    // Marionette depends on jquery, lodash and backbone
+    marionette : {
+      deps : ['jquery', 'lodash', 'backbone'],
+      exports : 'Marionette'
     },
 
     // Backbone webSQL depends on backbone
