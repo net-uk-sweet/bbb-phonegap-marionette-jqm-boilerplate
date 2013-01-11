@@ -45,6 +45,8 @@ function($, _, Backbone, App, LeadsView, loginTemplate) {
 
 			console.log('LoginView.onShow:');
 
+			$('#page').trigger('create');
+
 			this.leads.show(
 				new LeadsView({
 					collection: this.collection

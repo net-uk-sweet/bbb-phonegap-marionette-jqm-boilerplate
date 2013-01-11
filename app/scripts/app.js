@@ -68,6 +68,12 @@ function($, _, Backbone, Marionette, mainTemplate) {
       });
     });
 
+    $('div[data-role=page]').live('pagebeforeshow', function(event) {
+       // var currentPage = event.currentTarget;
+       // $(currentPage).trigger('create');
+       console.log('pagebeforeshow: ' + event.currentTarget);
+    });
+
     // -----------------------------------------
     // Handle other application events here
 

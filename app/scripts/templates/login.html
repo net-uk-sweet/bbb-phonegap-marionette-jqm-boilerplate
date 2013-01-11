@@ -1,9 +1,21 @@
-<div id="form">
+<div id="form" data-role="fieldcontain">
+    <label for="firstName">First name:</label>
+    <input type="text" name="firstName" id="firstName" />
+    <label for="firstName">Last name:</label>
+    <input type="text" name="lastName" id="lastName" />
+    <label for="email">Email address:</label>
+    <input type="email" name="email" id="email" />
+    <br /><button id="submit">Submit</button> 
+    <button id="delete">Delete all</button>
+</div>	
+
+<!-- div id="form">
     <input id="firstName" type="text" placeholder="First name" autofocus></input>
     <br /><input id="lastName" type="text"placeholder="Last name"></input>
     <br /><input id="email" type="email" placeholder="Email address"></input>
     <br /><button id="submit">Submit</button> <button id="delete">Delete all</button>
-</div>
+</div -->
+
 <hr />
 <h2>Leads</h2>
 <div id="leads"></div>
