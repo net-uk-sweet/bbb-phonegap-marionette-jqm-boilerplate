@@ -32,7 +32,8 @@ function($, _, Backbone, App, LeadsView, loginTemplate) {
 			// Listen for click events which bubble up to this view
 			// We can use jQuery selector to be more specific about which button
 			'click button#submit': 'handleSubmit',
-			'click button#delete': 'handleDelete'
+			'click button#delete': 'handleDelete',
+			'click button#test': 'handleTest'
 		},
 
 		initialize: function() {
@@ -44,8 +45,6 @@ function($, _, Backbone, App, LeadsView, loginTemplate) {
 		onShow: function() {
 
 			console.log('LoginView.onShow:');
-
-			$('#page').trigger('create');
 
 			this.leads.show(
 				new LeadsView({
@@ -62,7 +61,7 @@ function($, _, Backbone, App, LeadsView, loginTemplate) {
 			var lastName = $('#lastName');
 			var email = $('#email');
 
-			// // Create a new model based on values in inputs
+			// Create a new model based on values in inputs
 			this.collection.create({
 				firstName: firstName.val(),
 				lastName: lastName.val(),
@@ -76,6 +75,10 @@ function($, _, Backbone, App, LeadsView, loginTemplate) {
 
 		handleDelete: function() {
 			this.collection.reset();
+		},
+
+		handleTest: function() {
+			App.vent.trigger('test:submit', 'Hello App (from LoginView)');
 		}
 	});
 

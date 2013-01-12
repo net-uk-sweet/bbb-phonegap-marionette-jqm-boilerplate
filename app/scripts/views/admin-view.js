@@ -5,17 +5,20 @@ define([
 	'lodash',
 	'backbone',
 
-	'app'
+	'app',
+
+	// templates
+	'text!templates/login.html'
 ],
 
-function($, _, Backbone, App) {
+// TODO: we can use this view to demonstrate integration of various jqm components
+function($, _, Backbone, App, loginTemplate) {
 
 	'use strict';
 
-	var AdminView = Backbone.View.extend({
+	var AdminView = Backbone.Marionette.ItemView.extend({
 
-		// Use jQuery selector to associate view w/ existing DOM element
-		el: '.container',
+		template: _.template(loginTemplate),
 
 		events: {
 			// Listen for click events which bubble up to this view
@@ -31,11 +34,11 @@ function($, _, Backbone, App) {
 			console.log('AdminView.initialize:' /*, this.$el */);
 		},
 
-		render: function() {
+		onShow: function() {
 
-			console.log('AdminView.render:');
+			console.log('AdminView.onShow:');
 
-			this.$el.html('<h1>Welcome to the admin view</h1><p><a href="#">Back</a>');
+			//this.$el.html('<h1>Welcome to the admin view</h1><p><a href="#">Back</a>');
 		}
 	});
 

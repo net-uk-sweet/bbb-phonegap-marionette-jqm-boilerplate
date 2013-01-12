@@ -7,15 +7,15 @@ require.config({
   paths: {
     // JavaScript folders.
     libs: '../scripts/libs',
-    plugins: '../scripts/plugins',
+    plugins: '../scripts/plugins', // Amaze and 3rd party plugins / components
 
     // Libraries.
-    jquery: '../scripts/libs/jquery',
+    jquery: '../scripts/libs/jquery', // 1.8.0
     jquerymobile: '../scripts/libs/jquery.mobile-1.2.0',
-    lodash: '../scripts/libs/lodash',
-    backbone: '../scripts/libs/backbone',
-    marionette: '../scripts/libs/backbone.marionette',
-    text: '../scripts/libs/require/text' // require plug-in which compiles our templates
+    lodash: '../scripts/libs/lodash', // 0.7.0
+    backbone: '../scripts/libs/backbone', // 0.9.2
+    marionette: '../scripts/libs/backbone.marionette', // 1.0.0-rc2
+    text: '../scripts/libs/require/text' // 2.0.1 :- require plug-in which compiles our templates
   },
 
   shim: {
@@ -35,7 +35,7 @@ require.config({
     jquerymobile : ['jquery'],
 
     // Backbone webSQL depends on backbone
-    'components/backbone-websql': ['backbone']
+    'plugins/backbone-websql': ['backbone']
   }
 });
 

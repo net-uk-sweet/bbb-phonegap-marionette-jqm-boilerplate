@@ -3,13 +3,10 @@ define([
   'jquery',
   'lodash',
   'backbone',
-  'marionette',
-
-  // Templates
-  'text!templates/main.html'
+  'marionette'
 ],
 
-function($, _, Backbone, Marionette, mainTemplate) {
+function($, _, Backbone, Marionette) {
 
   'use strict';
 
@@ -23,12 +20,13 @@ function($, _, Backbone, Marionette, mainTemplate) {
 
   // Add the main region, that will hold the page layout.
   App.addRegions({
+    // Backbone.Marionette views will use the content div
+    // of our jqm page as their target
     main: '#content'
   });
 
   // Adds any methods to be run after the app was initialized.
   App.addInitializer(function() {
-    this.initAppLayout();
     this.initAppEvents();
   });
 
@@ -41,50 +39,35 @@ function($, _, Backbone, Marionette, mainTemplate) {
     Backbone.history.start({ pushState: false });
   });
 
-  // The main initializing function sets up the basic layout and its regions.
-  App.initAppLayout = function() {
-
-    var MainLayout = Backbone.Marionette.Layout.extend({
-      template: _.template(mainTemplate),
-      regions: {
-        header: '#header',
-        content: '#content',
-        footer: '#footer'
-      }
-    });
-
-    // Set the main layout
-    App.main.show(new MainLayout());
-  };
-  
   App.initAppEvents = function() {
+
+    // console.log('App.initAppEvents:');
 
     // All links with the role attribute set to nav-main will be
     // handled by the application's router.
-    $('a[role=nav-main]').click(function(e) {
+    $('a[data-role=nav-main]').click(function(e) {
       e.preventDefault();
       App.Router.navigate($(this).attr('href'), {
         trigger: true
       });
     });
 
-    $('div[data-role=page]').live('pagebeforeshow', function(event) {
-       // var currentPage = event.currentTarget;
-       // $(currentPage).trigger('create');
-       console.log('pagebeforeshow: ' + event.currentTarget);
-    });
-
     // -----------------------------------------
     // Handle other application events here
 
-    App.vent.on('survey:submit', function(/*e*/) {
-      // e is the SurveyModel instance passed as event object
-      // Add the populated filter data to the model and update route
-      //App.Result.set({ filters: e.get('filters') });
-      //App.Router.navigate('wall/' + e.get('wallId'), { trigger: true });
+    // We need to trigger a 'create' event on our page (pageContainer)
+    // any time anything changes to ensure that elements are jqm-ified correctly
+    App.main.on('show', function() {
+      // TODO: more thought required here :- this will only fire when the
+      // app region changes and the hardcoding of the selector is problematic
+      $('#page').trigger('create');
     });
 
-    console.log('App.initAppEvents:');
+    // Capture Application events
+    App.vent.on('test:submit', function(e) {
+      // e is the event payload
+      console.log('App.vent.test:submit: ', e);
+    });
   };
 
   return App;

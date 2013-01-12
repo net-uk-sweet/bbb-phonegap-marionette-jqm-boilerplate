@@ -13,13 +13,14 @@
     <body>
 
 
-        <!-- Main container. -->
-        <div id="page" data-role="page" data-url="page">
+        <!-- Main container :- we use a single jqm page as the target for our Backbone.Marionette views -->
+        <div id="page" data-role="page">
 
             <div data-role="header">
                 <h1>My Title</h1>
             </div><!-- /header -->
 
+            <!-- Backbone views will target this div -->    
             <div id="content" data-role="content">   
                 <p>Hello world</p>      
             </div><!-- /content -->
@@ -35,7 +36,7 @@
         <script type="text/javascript" src="scripts/libs/cordova-2.2.0.js"></script>
         
         <!-- build:js scripts/amd-app.js -->
-        <script data-main="scripts/config" src="scripts/libs/require.js"></script>
+        <script data-main="scripts/config" src="scripts/libs/require/require.js"></script>
         <!-- endbuild -->
     </body>
 </html>

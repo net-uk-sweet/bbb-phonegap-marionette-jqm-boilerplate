@@ -9,7 +9,7 @@ define([
 	'models/lead-model',
 
 	// components
-	'components/backbone-websql'
+	'plugins/backbone-websql'
 ],
 
 function(App, Backbone, LeadModel) {
