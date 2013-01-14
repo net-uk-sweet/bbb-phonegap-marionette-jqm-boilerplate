@@ -12,10 +12,11 @@ define([
 
 	// Views
 	'views/login-view',
-	'views/admin-view'
+	'views/admin-view',
+	'views/component-view'
 ],
 
-function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView) {
+function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, ComponentView) {
 
 	'use strict';
 
@@ -25,24 +26,40 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView) {
 
 			console.log('Controller.handleIndexRoute:');
 			
-			// Fetch the leads list from local storage (webSQL)
-			var leadsList = new LeadsList();
-			leadsList.fetch({
-				success: function(collection) {
+			// We'll always want to go straight to log-in on startup
+			this.handleLoginRoute();
+		},
 
-					// Create a login view and pass it the collection
-					App.main.show(
-						new LoginView({ collection: collection })
-					);
-				}
-			});
+		handleLoginRoute: function() {
+
+			console.log('Controller.handleLoginRoute:');
+
+			// It's really just a nav view for the time being
+			App.main.show(new LoginView());
 		},
 
 		handleAdminRoute: function() {
 
 			console.log('Controller.handleAdminRoute:');
+			
+			// Fetch the leads list from local storage (webSQL)
+			var leadsList = new LeadsList();
+			leadsList.fetch({
+				success: function(collection) {
 
-			App.main.show(new AdminView());
+					// Create a basic admin view and pass it the collection
+					App.main.show(
+						new AdminView({ collection: collection })
+					);
+				}
+			});
+		},
+
+		handleComponentRoute: function() {
+
+			console.log('Controller.handleComponentRoute:');
+
+			App.main.show(new ComponentView());
 		}
 	};
 });

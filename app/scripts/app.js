@@ -13,10 +13,25 @@ function($, _, Backbone, Marionette) {
 
   /* ======================================================================== */
 
+  // We can override Region open method to add a transition in
+  Marionette.Region.prototype.open = function(view) {
+    this.$el.hide();
+    this.$el.html(view.el);
+    this.$el.fadeIn('slow');
+  };
+
+  // Trigger the create event on page which JQM requires
+  Marionette.CollectionView.prototype.onRender = function() {
+    App.$page.trigger('create');
+  };
+
   var App = new Backbone.Marionette.Application();
 
   // Set up basic paths.
   App.root = '/';
+
+  // JQM page div
+  App.$page = $('#page');
 
   // Add the main region, that will hold the page layout.
   App.addRegions({
@@ -56,17 +71,20 @@ function($, _, Backbone, Marionette) {
     // Handle other application events here
 
     // We need to trigger a 'create' event on our page (pageContainer)
-    // any time anything changes to ensure that elements are jqm-ified correctly
+    // to ensure that elements are JQM-ified correctly when anything new is rendered.
+    // See also the extension to Marionette.CollectionView above.
+    // This is a good hook for that logic as the event is triggered any time the
+    // Application level RegionManager is populated with a new view.
     App.main.on('show', function() {
-      // TODO: more thought required here :- this will only fire when the
-      // app region changes and the hardcoding of the selector is problematic
-      $('#page').trigger('create');
+      console.log('App.main.show: ');
+      App.$page.trigger('create');
     });
 
     // Capture Application events
-    App.vent.on('test:submit', function(e) {
-      // e is the event payload
-      console.log('App.vent.test:submit: ', e);
+    App.vent.on('login:navigate', function(e) {
+      // Could probably use this as a general purpose hook for nav
+      // triggered from within our views
+      App.Router.navigate(e, { trigger: true });
     });
   };
 

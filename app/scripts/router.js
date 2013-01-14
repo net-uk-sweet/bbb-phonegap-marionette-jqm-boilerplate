@@ -17,7 +17,9 @@ function(Backbone, Marionette, controller) {
 
     appRoutes: {
       '': 'handleIndexRoute',
-      'admin': 'handleAdminRoute'
+      'login': 'handleLoginRoute',
+      'admin': 'handleAdminRoute',
+      'component': 'handleComponentRoute'
     }
   });
 

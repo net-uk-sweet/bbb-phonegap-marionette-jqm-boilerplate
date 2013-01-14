@@ -7,38 +7,78 @@ define([
 
 	'app',
 
-	// templates
-	'text!templates/login.html'
+	// Views
+	'views/leads-view',
+
+	// Templates
+	'text!templates/admin.html'
 ],
 
-// TODO: we can use this view to demonstrate integration of various jqm components
-function($, _, Backbone, App, loginTemplate) {
+function($, _, Backbone, App, LeadsView, adminTemplate) {
 
 	'use strict';
 
-	var AdminView = Backbone.Marionette.ItemView.extend({
+	var AdminView = Backbone.Marionette.Layout.extend({
 
-		template: _.template(loginTemplate),
+		// Resolves to login.html in templates directory
+		template: _.template(adminTemplate),
+
+		regions: {
+			// Subviews can target these regions of the template
+			leads: '#leads'
+		},
 
 		events: {
 			// Listen for click events which bubble up to this view
 			// We can use jQuery selector to be more specific about which button
-			// 'click button#submit': 'handleSubmit',
-			// 'click button#reset': 'handleReset',
-			// 'click button#delete': 'handleDelete',
+			'click button#submit': 'handleSubmit',
+			'click button#delete': 'handleDelete',
+			'click button#test': 'handleTest'
 		},
 
 		initialize: function() {
 
 			// This is essentially the constructor and is called on instantiation
-			console.log('AdminView.initialize:' /*, this.$el */);
+			console.log('LoginView.initialize:' /*, this.$el */);
 		},
 
 		onShow: function() {
 
-			console.log('AdminView.onShow:');
+			console.log('LoginView.onShow:');
 
-			//this.$el.html('<h1>Welcome to the admin view</h1><p><a href="#">Back</a>');
+			this.leads.show(
+				new LeadsView({
+					collection: this.collection
+				})
+			);
+		},
+
+		handleSubmit: function() {
+
+			console.log('LoginView.handleSubmit:');
+
+			var firstName = $('#firstName');
+			var lastName = $('#lastName');
+			var email = $('#email');
+
+			// Create a new model based on values in inputs
+			this.collection.create({
+				firstName: firstName.val(),
+				lastName: lastName.val(),
+				email: email.val()
+			});
+
+			firstName.val('');
+			lastName.val('');
+			email.val('');
+		},
+
+		handleDelete: function() {
+			this.collection.reset();
+		},
+
+		handleTest: function() {
+			App.vent.trigger('test:submit', 'Hello App (from LoginView)');
 		}
 	});
 
