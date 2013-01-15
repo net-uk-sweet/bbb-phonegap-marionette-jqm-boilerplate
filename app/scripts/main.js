@@ -34,11 +34,14 @@ function($, Backbone, App, router) {
     console.log('Main.mobileinit:');
     // TODO: would be nice to abstract this into a separate configuration file
 
-    // Prevents all anchor click handling including the addition of active button state and alternate link blurring.
+    $.mobile.ajaxEnabled = false;
     $.mobile.linkBindingEnabled = false;
-
-    // Disabling this will prevent jQuery Mobile from handling hash changes
     $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
+
+    $.mobile.defaultPageTransition = 'slide';
+
+    $.mobile.changePage.defaults.allowSamePageTransition = true;
   });
 
   if (navigator.userAgent.match(/(iPad|iPhone|Android)/)) {

@@ -35,22 +35,26 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 			console.log('Controller.handleLoginRoute:');
 
 			// It's really just a nav view for the time being
-			App.main.show(new LoginView());
+			//App.main.show(new LoginView());
+			this.changePage(new LoginView());
 		},
 
 		handleAdminRoute: function() {
 
 			console.log('Controller.handleAdminRoute:');
-			
+
 			// Fetch the leads list from local storage (webSQL)
+			var that = this;
 			var leadsList = new LeadsList();
 			leadsList.fetch({
 				success: function(collection) {
 
 					// Create a basic admin view and pass it the collection
-					App.main.show(
-						new AdminView({ collection: collection })
-					);
+					// App.main.show(
+					// 	new AdminView({ collection: collection })
+					// );
+
+					that.changePage(new AdminView({ collection: collection }));
 				}
 			});
 		},
@@ -60,6 +64,20 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 			console.log('Controller.handleComponentRoute:');
 
 			App.main.show(new ComponentView());
-		}
+		},
+
+	    changePage: function(page) {
+	        
+	        $(page.el).attr('data-role', 'page');
+	        page.render();
+	        $('body').append($(page.el));
+	        var transition = $.mobile.defaultPageTransition;
+	        // // We don't want to slide the first page
+	        // if (this.firstPage) {
+	        //     transition = 'none';
+	        //     this.firstPage = false;
+	        // }
+	        $.mobile.changePage($(page.el), { changeHash:false, transition: transition });
+	    }
 	};
 });

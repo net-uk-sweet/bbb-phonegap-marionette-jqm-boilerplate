@@ -42,7 +42,7 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 			console.log('LoginView.initialize:' /*, this.$el */);
 		},
 
-		onShow: function() {
+		onRender: function() {
 
 			console.log('LoginView.onShow:');
 

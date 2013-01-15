@@ -29,6 +29,8 @@ function($, _, Backbone, App, loginTemplate) {
 
 		initialize: function() {
 
+			// this.$el.attr('data-role', 'page');
+
 			// This is essentially the constructor and is called on instantiation
 			console.log('LoginView.initialize:' /*, this.$el */);
 		},

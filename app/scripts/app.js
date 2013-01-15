@@ -14,16 +14,16 @@ function($, _, Backbone, Marionette) {
   /* ======================================================================== */
 
   // We can override Region open method to add a transition in
-  Marionette.Region.prototype.open = function(view) {
-    this.$el.hide();
-    this.$el.html(view.el);
-    this.$el.fadeIn('slow');
-  };
+  // Marionette.Region.prototype.open = function(view) {
+  //   this.$el.hide();
+  //   this.$el.html(view.el);
+  //   this.$el.fadeIn('slow');
+  // };
 
   // Trigger the create event on page which JQM requires
-  Marionette.CollectionView.prototype.onRender = function() {
-    App.$page.trigger('create');
-  };
+  // Marionette.CollectionView.prototype.onRender = function() {
+  //   App.$page.trigger('create');
+  // };
 
   var App = new Backbone.Marionette.Application();
 
@@ -37,7 +37,7 @@ function($, _, Backbone, Marionette) {
   App.addRegions({
     // Backbone.Marionette views will use the content div
     // of our jqm page as their target
-    main: '#content'
+    main: 'page'
   });
 
   // Adds any methods to be run after the app was initialized.
@@ -67,6 +67,11 @@ function($, _, Backbone, Marionette) {
       });
     });
 
+    // Remove page from DOM when it's being replaced
+    $('div[data-role="page"]').live('pagehide', function (event, ui) {
+        $(event.currentTarget).remove();
+    });
+
     // -----------------------------------------
     // Handle other application events here
 
@@ -77,7 +82,8 @@ function($, _, Backbone, Marionette) {
     // Application level RegionManager is populated with a new view.
     App.main.on('show', function() {
       console.log('App.main.show: ');
-      App.$page.trigger('create');
+      // App.$page.trigger('create');
+      $('div[data-role="page"]').trigger('create');
     });
 
     // Capture Application events
