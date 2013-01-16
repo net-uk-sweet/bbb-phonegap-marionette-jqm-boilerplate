@@ -25,6 +25,12 @@ function($, _, Backbone, App, componentTemplate) {
 			// 'click button#submit': 'handleSubmit',
 			// 'click button#reset': 'handleReset',
 			// 'click button#delete': 'handleDelete',
+
+			'click button': 'handleClick'
+		},
+
+		handleClick: function() {
+			App.vent.trigger('test', 'Hello from ComponentView');
 		}
 	});
 

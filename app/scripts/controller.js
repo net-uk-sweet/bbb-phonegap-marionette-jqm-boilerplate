@@ -47,13 +47,8 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 			var that = this;
 			var leadsList = new LeadsList();
 			leadsList.fetch({
+				// TODO: use bind to avoid callback scope silliness
 				success: function(collection) {
-
-					// Create a basic admin view and pass it the collection
-					// App.main.show(
-					// 	new AdminView({ collection: collection })
-					// );
-
 					that.changePage(new AdminView({ collection: collection }));
 				}
 			});
@@ -63,7 +58,7 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 
 			console.log('Controller.handleComponentRoute:');
 
-			App.main.show(new ComponentView());
+			this.changePage(new ComponentView());
 		},
 
 	    changePage: function(page) {

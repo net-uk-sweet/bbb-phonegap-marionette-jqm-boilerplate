@@ -30,15 +30,15 @@ function($, _, Backbone, Marionette) {
   // Set up basic paths.
   App.root = '/';
 
-  // JQM page div
-  App.$page = $('#page');
+  // // JQM page div
+  // App.$page = $('#page');
 
-  // Add the main region, that will hold the page layout.
-  App.addRegions({
-    // Backbone.Marionette views will use the content div
-    // of our jqm page as their target
-    main: 'page'
-  });
+  // // Add the main region, that will hold the page layout.
+  // App.addRegions({
+  //   // Backbone.Marionette views will use the content div
+  //   // of our jqm page as their target
+  //   main: 'page'
+  // });
 
   // Adds any methods to be run after the app was initialized.
   App.addInitializer(function() {
@@ -68,7 +68,7 @@ function($, _, Backbone, Marionette) {
     });
 
     // Remove page from DOM when it's being replaced
-    $('div[data-role="page"]').live('pagehide', function (event, ui) {
+    $('div[data-role="page"]').live('pagehide', function (event /*, ui */) {
         $(event.currentTarget).remove();
     });
 
@@ -80,11 +80,14 @@ function($, _, Backbone, Marionette) {
     // See also the extension to Marionette.CollectionView above.
     // This is a good hook for that logic as the event is triggered any time the
     // Application level RegionManager is populated with a new view.
-    App.main.on('show', function() {
-      console.log('App.main.show: ');
-      // App.$page.trigger('create');
-      $('div[data-role="page"]').trigger('create');
-    });
+
+    // TODO: need to find a replacement for this :-
+
+    // App.main.on('show', function() {
+    //   console.log('App.main.show: ');
+    //   // App.$page.trigger('create');
+    //   $('div[data-role="page"]').trigger('create');
+    // });
 
     // Capture Application events
     App.vent.on('login:navigate', function(e) {
