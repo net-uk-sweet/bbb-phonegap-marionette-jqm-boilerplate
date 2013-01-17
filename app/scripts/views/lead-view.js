@@ -25,6 +25,12 @@ function($, _, Backbone, App, leadTemplate) {
 
 		handleDelete: function() {
 			this.model.destroy();
+		},
+
+		onClose: function() {
+
+			// This lets us know the view is being cleaned up
+			console.log('LeadView.onClose');
 		}
 	});
 

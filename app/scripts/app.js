@@ -18,6 +18,11 @@ function($, _, Backbone, Marionette) {
   // Set up basic paths.
   App.root = '/';
 
+  // Need to manage incoming and outgoing views so we can call Marionette.View.close
+  // method on the outgoing view when JQM has hidden it.
+  App.incoming = null;
+  App.outgoing = null;
+
   // Adds any methods to be run after the app was initialized.
   App.addInitializer(function() {
     this.initExtensions();
@@ -59,9 +64,12 @@ function($, _, Backbone, Marionette) {
       App.Router.navigate(url, { trigger: true });
     }
 
-    // Remove page from DOM when it's being replaced
-    $('div[data-role="page"]').on('pagehide', function (e /*, ui */) {
-        $(e.currentTarget).remove();
+    // Close Marionette.View when it's been replaced by JQM
+    $('div[data-role=page], div[data-role=dialog]').live('pagehide', function (/*e, ui */) {
+      // TODO: thought live was deprecated in favour of on
+        if (App.outgoing) {
+          App.outgoing.close();
+        }
     });
   };
 

@@ -37,6 +37,12 @@ function($, _, Backbone, App, componentTemplate) {
 		initialize: function() {
 
 			console.log('ComponentView.initialize:' /*, this.$el */);
+		},
+
+		onClose: function() {
+
+			// This lets us know the view is being cleaned up
+			console.log('ComponentView.onClose');
 		}
 	});
 

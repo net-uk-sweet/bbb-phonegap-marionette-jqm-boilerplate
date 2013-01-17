@@ -39,20 +39,19 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 		// Map events from view's element (this.el) to view handlers
 		events: {
 			'click button#submit': 'handleSubmit',
-			'click button#delete': 'handleDelete',
-			'click button#test': 'handleTest'
+			'click button#delete': 'handleDelete'
 		},
 
 		// Constructor function, called on initialization
 		initialize: function() {
 
 			// This is essentially the constructor and is called on instantiation
-			console.log('LoginView.initialize:' /*, this.$el */);
+			console.log('AdminView.initialize:' /*, this.$el */);
 		},
 
 		onRender: function() {
 
-			console.log('LoginView.onShow:');
+			console.log('AdminView.onRender:');
 
 			this.leads.show(
 				new LeadsView({
@@ -63,7 +62,7 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 
 		handleSubmit: function() {
 
-			console.log('LoginView.handleSubmit:');
+			console.log('AdminView.handleSubmit:');
 
 			var firstName = $('#firstName');
 			var lastName = $('#lastName');
@@ -85,8 +84,10 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 			this.collection.reset();
 		},
 
-		handleTest: function() {
-			App.vent.trigger('test:submit', 'Hello App (from LoginView)');
+		onClose: function() {
+
+			// This lets us know the view is being cleaned up
+			console.log('AdminView.onClose');
 		}
 	});
 

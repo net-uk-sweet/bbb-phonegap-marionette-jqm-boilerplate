@@ -21,6 +21,12 @@ function($, _, Backbone, App, LeadView) {
 
 		initialize: function() {
 			this.collection.on('change', this.render, this);
+		},
+
+		onClose: function() {
+
+			// This lets us know the view is being cleaned up
+			console.log('LeadsView.onClose');
 		}
 	});
 

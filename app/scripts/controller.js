@@ -72,6 +72,9 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 	        
 	        var $el = view.$el;
 
+	        App.outgoing = App.incoming;
+	        App.incoming = view;
+
 	        view.render();
 	        $('body').append($el);
 

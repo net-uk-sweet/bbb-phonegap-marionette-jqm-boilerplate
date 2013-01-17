@@ -39,14 +39,15 @@ function($, _, Backbone, App, loginTemplate) {
 			console.log('LoginView.initialize:' /*, this.$el */);
 		},
 
-		onShow: function() {
-
-			console.log('LoginView.onShow:');
-		},
-
 		handleClick: function(e) {
 			// Trigger navigate event on Application
 			App.vent.trigger('navigate', $(e.currentTarget).attr('id'));
+		},
+
+		onClose: function() {
+
+			// This lets us know the view is being cleaned up
+			console.log('LoginView.onClose');
 		}
 	});
 

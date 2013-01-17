@@ -47,6 +47,12 @@ function($, _, Backbone, App, dialogTemplate) {
 		handleClick: function(e) {
 			// Trigger navigate event on Application
 			App.vent.trigger('navigate', $(e.currentTarget).val());
+		},
+
+		onClose: function() {
+
+			// This lets us know the view is being cleaned up
+			console.log('DialogView.onClose');
 		}
 	});
 
