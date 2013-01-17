@@ -15,6 +15,7 @@ function($, Backbone, App, router) {
   var deviceReadyDeferred = $.Deferred();
   var jqmReadyDeferred = $.Deferred();
 
+  // Start up the application
   function start() {
     
     console.log('Main.start:');
@@ -23,6 +24,7 @@ function($, Backbone, App, router) {
     App.start();
   }
 
+  // Phonegap device ready handler
   function onDeviceReady(isDevice) {
     console.log('Main.onDeviceReady: running on a device: ' + (isDevice !== false));
     deviceReadyDeferred.resolve();

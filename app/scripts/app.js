@@ -20,7 +20,8 @@ function($, _, Backbone, Marionette) {
 
   // Adds any methods to be run after the app was initialized.
   App.addInitializer(function() {
-    this.initAppEvents();
+    this.initExtensions();
+    this.initEvents();
   });
 
   App.on('initialize:before', function() {
@@ -32,7 +33,17 @@ function($, _, Backbone, Marionette) {
     Backbone.history.start({ pushState: false });
   });
 
-  App.initAppEvents = function() {
+  App.initExtensions = function() {
+
+    // Override Marionette onRender event so it triggers 'create' on
+    // element. This ensures dynamic content is given the JQM treatment
+    Marionette.View.prototype.onRender = function() {
+      this.$el.trigger('create');
+      return this;
+    };
+  };
+
+  App.initEvents = function() {
 
     // All links with the role attribute set to nav-main will be
     // handled by the application's router.
@@ -49,13 +60,8 @@ function($, _, Backbone, Marionette) {
     }
 
     // Remove page from DOM when it's being replaced
-    $('div[data-role="page"]').live('pagehide', function (e /*, ui */) {
+    $('div[data-role="page"]').on('pagehide', function (e /*, ui */) {
         $(e.currentTarget).remove();
-    });
-
-    // Triggering a create on pageshow ensures any dynamic content is JQM-ified
-    $('div[data-role="page"]').live('pageshow', function (/* event, ui */) {
-        $(this).trigger('create');
     });
   };
 
