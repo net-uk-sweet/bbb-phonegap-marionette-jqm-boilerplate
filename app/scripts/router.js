@@ -19,7 +19,8 @@ function(Backbone, Marionette, controller) {
       '': 'handleIndexRoute',
       'login': 'handleLoginRoute',
       'admin': 'handleAdminRoute',
-      'component': 'handleComponentRoute'
+      'component': 'handleComponentRoute',
+      'dialog': 'handleDialogRoute'
     }
   });
 

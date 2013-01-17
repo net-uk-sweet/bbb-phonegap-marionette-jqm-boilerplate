@@ -13,10 +13,11 @@ define([
 	// Views
 	'views/login-view',
 	'views/admin-view',
-	'views/component-view'
+	'views/component-view',
+	'views/dialog-view'
 ],
 
-function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, ComponentView) {
+function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, ComponentView, DialogView) {
 
 	'use strict';
 
@@ -34,9 +35,8 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 
 			console.log('Controller.handleLoginRoute:');
 
-			// It's really just a nav view for the time being
-			//App.main.show(new LoginView());
-			this.changePage(new LoginView());
+			// It's really just nav at the moment
+			this.changeView(new LoginView());
 		},
 
 		handleAdminRoute: function() {
@@ -47,9 +47,9 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 			var that = this;
 			var leadsList = new LeadsList();
 			leadsList.fetch({
-				// TODO: use bind to avoid callback scope silliness
+				// TODO: use bind here to avoid callback scope silliness
 				success: function(collection) {
-					that.changePage(new AdminView({ collection: collection }));
+					that.changeView(new AdminView({ collection: collection }));
 				}
 			});
 		},
@@ -58,21 +58,27 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 
 			console.log('Controller.handleComponentRoute:');
 
-			this.changePage(new ComponentView());
+			this.changeView(new ComponentView());
 		},
 
-	    changePage: function(page) {
+		handleDialogRoute: function() {
+
+			console.log('Controller.handleDialogRoute:');
+
+			this.changeView(new DialogView(), 'pop');
+		},
+
+	    changeView: function(view, transition) {
 	        
-	        $(page.el).attr('data-role', 'page');
-	        page.render();
-	        $('body').append($(page.el));
-	        var transition = $.mobile.defaultPageTransition;
-	        // // We don't want to slide the first page
-	        // if (this.firstPage) {
-	        //     transition = 'none';
-	        //     this.firstPage = false;
-	        // }
-	        $.mobile.changePage($(page.el), { changeHash:false, transition: transition });
+	        var $el = view.$el;
+
+	        view.render();
+	        $('body').append($el);
+
+	        $.mobile.changePage($el, {
+	        	changeHash: false,
+	        	transition: transition || $.mobile.defaultPageTransition
+	        });
 	    }
 	};
 });

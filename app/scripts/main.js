@@ -32,16 +32,13 @@ function($, Backbone, App, router) {
   $(document).on('mobileinit', function() {
 
     console.log('Main.mobileinit:');
-    // TODO: would be nice to abstract this into a separate configuration file
 
+    // TODO: would be nice to abstract this into a separate configuration file
     $.mobile.ajaxEnabled = false;
     $.mobile.linkBindingEnabled = false;
     $.mobile.hashListeningEnabled = false;
     $.mobile.pushStateEnabled = false;
-
     $.mobile.defaultPageTransition = 'slide';
-
-    $.mobile.changePage.defaults.allowSamePageTransition = true;
   });
 
   if (navigator.userAgent.match(/(iPad|iPhone|Android)/)) {

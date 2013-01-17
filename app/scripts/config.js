@@ -10,7 +10,7 @@ require.config({
     plugins: '../scripts/plugins', // Amaze and 3rd party plugins / components
 
     // Libraries.
-    jquery: '../scripts/libs/jquery', // 1.8.0
+    jquery: '../scripts/libs/jquery', // 1.9.0
     jquerymobile: '../scripts/libs/jquery.mobile-1.2.0',
     lodash: '../scripts/libs/lodash', // 0.7.0
     backbone: '../scripts/libs/backbone', // 0.9.2

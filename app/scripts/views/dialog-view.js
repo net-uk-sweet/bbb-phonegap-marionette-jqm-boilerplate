@@ -8,25 +8,25 @@ define([
 	'app',
 
 	// templates
-	'text!templates/login.html'
+	'text!templates/dialog.html'
 ],
 
-function($, _, Backbone, App, loginTemplate) {
+function($, _, Backbone, App, dialogTemplate) {
 
 	'use strict';
 
-	var LoginView = Backbone.Marionette.ItemView.extend({
+	var DialogView = Backbone.Marionette.ItemView.extend({
 
 		// Add the attributes JQM expects to the view's element
 		attributes: function() {
 			return {
 				'data-url': 'login',
-				'data-role': 'page'
+				'data-role': 'dialog'
 			};
 		},
 
-		// Resolves to login.html in templates directory
-		template: _.template(loginTemplate),
+		// Resolves to dialog.html in templates directory
+		template: _.template(dialogTemplate),
 
 		// Map events from view's element (this.el) to view handlers
 		events: {
@@ -46,9 +46,9 @@ function($, _, Backbone, App, loginTemplate) {
 
 		handleClick: function(e) {
 			// Trigger navigate event on Application
-			App.vent.trigger('navigate', $(e.currentTarget).attr('id'));
+			App.vent.trigger('navigate', $(e.currentTarget).val());
 		}
 	});
 
-	return LoginView;
+	return DialogView;
 });

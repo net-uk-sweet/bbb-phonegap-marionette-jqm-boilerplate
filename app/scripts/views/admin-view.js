@@ -20,7 +20,15 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 
 	var AdminView = Backbone.Marionette.Layout.extend({
 
-		// Resolves to login.html in templates directory
+		// Add attributes JQM expects
+		attributes: function() {
+			return {
+				'data-url': 'admin',
+				'data-role': 'page'
+			};
+		},
+
+		// Resolves to admin.html in templates directory
 		template: _.template(adminTemplate),
 
 		regions: {
@@ -28,14 +36,14 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 			leads: '#leads'
 		},
 
+		// Map events from view's element (this.el) to view handlers
 		events: {
-			// Listen for click events which bubble up to this view
-			// We can use jQuery selector to be more specific about which button
 			'click button#submit': 'handleSubmit',
 			'click button#delete': 'handleDelete',
 			'click button#test': 'handleTest'
 		},
 
+		// Constructor function, called on initialization
 		initialize: function() {
 
 			// This is essentially the constructor and is called on instantiation
