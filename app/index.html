@@ -14,7 +14,22 @@
 
 
         <!-- JQM seems to need this in the page even though we don't use it -->
-        <div data-role="page"></div>
+        <div id="page" data-role="page">
+            <div id="header" data-role="header" data-position="fixed">
+                <!-- dummy content HACK for jQuery mobile styling -->
+                <h1>Header</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="a.html" class="ui-btn-active ui-state-persist">One</a></li>
+                        <li><a href="b.html">Two</a></li>
+                        <li><a href="b.html">Three</a></li>
+                        <li><a href="b.html">Four</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div>
+            <div id="content" data-role="content"></div>
+            <div id="footer" data-role="footer" data-position="fixed"></div>
+        </div>
 
 
         <!-- for remote debugging with WEINRE -->

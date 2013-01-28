@@ -44,9 +44,9 @@ function($, _, Backbone, App, dialogTemplate) {
 			console.log('LoginView.onShow:');
 		},
 
-		handleClick: function(e) {
+		handleClick: function(/*e*/) {
 			// Trigger navigate event on Application
-			App.vent.trigger('navigate', $(e.currentTarget).val());
+			App.vent.trigger('navigate', '#');
 		},
 
 		onClose: function() {

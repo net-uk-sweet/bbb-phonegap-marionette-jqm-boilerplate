@@ -7,23 +7,17 @@ define([
 
 	'app',
 
+	'models/settings-model',
+
 	// templates
 	'text!templates/login.html'
 ],
 
-function($, _, Backbone, App, loginTemplate) {
+function($, _, Backbone, App, settingsModel, loginTemplate) {
 
 	'use strict';
 
 	var LoginView = Backbone.Marionette.ItemView.extend({
-
-		// Add the attributes JQM expects to the view's element
-		attributes: function() {
-			return {
-				'data-url': 'login',
-				'data-role': 'page'
-			};
-		},
 
 		// Resolves to login.html in templates directory
 		template: _.template(loginTemplate),
@@ -36,7 +30,7 @@ function($, _, Backbone, App, loginTemplate) {
 		// Constructor function, called on initialization
 		initialize: function() {
 
-			console.log('LoginView.initialize:' /*, this.$el */);
+			console.log('LoginView.initialize:', settingsModel.get('pin') /*, this.$el */);
 		},
 
 		handleClick: function(e) {

@@ -10,23 +10,18 @@ define([
 	// Views
 	'views/leads-view',
 
+	// Models
+	'models/settings-model',
+
 	// Templates
 	'text!templates/admin.html'
 ],
 
-function($, _, Backbone, App, LeadsView, adminTemplate) {
+function($, _, Backbone, App, LeadsView, settingsModel, adminTemplate) {
 
 	'use strict';
 
 	var AdminView = Backbone.Marionette.Layout.extend({
-
-		// Add attributes JQM expects
-		attributes: function() {
-			return {
-				'data-url': 'admin',
-				'data-role': 'page'
-			};
-		},
 
 		// Resolves to admin.html in templates directory
 		template: _.template(adminTemplate),
@@ -46,10 +41,10 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 		initialize: function() {
 
 			// This is essentially the constructor and is called on instantiation
-			console.log('AdminView.initialize:' /*, this.$el */);
+			console.log('AdminView.initialize:', settingsModel.get('pin') /*, this.$el */);
 		},
 
-		onRender: function() {
+		onShow: function() {
 
 			console.log('AdminView.onRender:');
 

@@ -10,7 +10,6 @@ function($, _, Backbone, Marionette) {
 
   'use strict';
 
-
   /* ======================================================================== */
 
   var App = new Backbone.Marionette.Application();
@@ -18,13 +17,9 @@ function($, _, Backbone, Marionette) {
   // Set up basic paths.
   App.root = '/';
 
-  // Need to manage incoming and outgoing views so we can call Marionette.View.close
-  // method on the outgoing view when JQM has hidden it.
-  App.incoming = null;
-  App.outgoing = null;
-
   // Adds any methods to be run after the app was initialized.
   App.addInitializer(function() {
+    this.initAppLayout();
     this.initExtensions();
     this.initEvents();
   });
@@ -38,14 +33,27 @@ function($, _, Backbone, Marionette) {
     Backbone.history.start({ pushState: false });
   });
 
+  App.initAppLayout = function() {
+
+    // Add the main regions
+    App.addRegions({
+      header: '#header',
+      content: '#content',
+      footer: '#footer'
+    });
+  };
+
   App.initExtensions = function() {
 
-    // Override Marionette onRender event so it triggers 'create' on
-    // element. This ensures dynamic content is given the JQM treatment
-    Marionette.View.prototype.onRender = function() {
+    var triggerCreate = function() {
       this.$el.trigger('create');
       return this;
     };
+
+    // Override Marionette onRender event so it triggers 'create' on
+    // element. This ensures dynamic content is given the JQM treatment
+    Marionette.Region.prototype.onShow = triggerCreate;
+    Marionette.View.prototype.onRender = triggerCreate;
   };
 
   App.initEvents = function() {
@@ -63,14 +71,6 @@ function($, _, Backbone, Marionette) {
     function navigate(url) {
       App.Router.navigate(url, { trigger: true });
     }
-
-    // Close Marionette.View when it's been replaced by JQM
-    $('div[data-role=page], div[data-role=dialog]').live('pagehide', function (/*e, ui */) {
-      // TODO: thought live was deprecated in favour of on
-        if (App.outgoing) {
-          App.outgoing.close();
-        }
-    });
   };
 
   return App;

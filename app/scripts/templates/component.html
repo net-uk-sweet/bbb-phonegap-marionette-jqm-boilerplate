@@ -1,55 +1,40 @@
-<!-- TODO: we have some duplication in our templates which should be addressed -->
-<div data-role="header">
-    <h1>Backbone, Require.js and jQuery Mobile prototype</h1>
+<!-- RADIO BUTTONS IN A VERTICAL GROUP -->
+
+<div data-role="fieldcontain">
+    <fieldset data-role="controlgroup">
+        <legend>Choose a pet:</legend>
+            <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
+            <label for="radio-choice-1">Cat</label>
+
+            <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
+            <label for="radio-choice-2">Dog</label>
+
+            <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3"  />
+            <label for="radio-choice-3">Hamster</label>
+
+            <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
+            <label for="radio-choice-4">Lizard</label>
+    </fieldset>
 </div>
 
-<div id="content" data-role="content">   
-    <!-- 
-    If you manipulate a radio button via JavaScript, you must call the refresh method on it to update the visual styling. Here is an example:
+<!-- A CHECKBOX -->
 
-    $("input[type='radio']").attr("checked",true).checkboxradio("refresh");
-    -->
-    
-    <a href="#login" data-role="nav-main">Back</a>
+<div data-role="fieldcontain">
+    <fieldset data-role="controlgroup">
+        <legend>Agree to the terms:</legend>
+        <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+        <label for="checkbox-1">I agree</label>
+    </fieldset>
+</div>
 
-    <!-- RADIO BUTTONS IN A VERTICAL GROUP -->
+<!-- A DROPDOWN -->
 
-    <div data-role="fieldcontain">
-        <fieldset data-role="controlgroup">
-            <legend>Choose a pet:</legend>
-                <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
-                <label for="radio-choice-1">Cat</label>
-
-                <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
-                <label for="radio-choice-2">Dog</label>
-
-                <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3"  />
-                <label for="radio-choice-3">Hamster</label>
-
-                <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
-                <label for="radio-choice-4">Lizard</label>
-        </fieldset>
-    </div>
-
-    <!-- A CHECKBOX -->
-
-    <div data-role="fieldcontain">
-        <fieldset data-role="controlgroup">
-            <legend>Agree to the terms:</legend>
-            <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-            <label for="checkbox-1">I agree</label>
-        </fieldset>
-    </div>
-
-    <!-- A DROPDOWN -->
-
-    <div data-role="fieldcontain">
-        <label for="select-choice-1" class="select">Choose shipping method:</label>
-        <select name="select-choice-1" id="select-choice-1">
-            <option value="standard">Standard: 7 day</option>
-            <option value="rush">Rush: 3 days</option>
-            <option value="express">Express: next day</option>
-            <option value="overnight">Overnight</option>
-        </select>
-    </div>
+<div data-role="fieldcontain">
+    <label for="select-choice-1" class="select">Choose shipping method:</label>
+    <select name="select-choice-1" id="select-choice-1">
+        <option value="standard">Standard: 7 day</option>
+        <option value="rush">Rush: 3 days</option>
+        <option value="express">Express: next day</option>
+        <option value="overnight">Overnight</option>
+    </select>
 </div>

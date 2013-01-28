@@ -32,7 +32,12 @@ function(Backbone) {
 			// probably want defaults for these
 			selections: [ /* array or collection of Selection models */ ],
 			complete: false
+		},
+
+		sync: function(method, model, options) {
+			return Backbone.LocalStorage.sync(method, model, options);
 		}
+		
 		// TODO: if possible we should mirror naming used in CRM db
 	});
 

@@ -40,6 +40,10 @@ function(App, Backbone, LeadModel) {
 			this.store = new WebSQLStore(db, 'leads');
 		},
 
+		sync: function(method, model, options) {
+			return Backbone.LocalStorage.sync(method, model, options);
+		},
+
 		// Override Backbone.Collection's default reset method to ensure that
 		// the data in localStorage (webSQL) is removed
 		reset: function(models, options) {

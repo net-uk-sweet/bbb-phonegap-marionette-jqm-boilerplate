@@ -13,16 +13,17 @@ function(App, Backbone) {
 
 	var SettingsModel = Backbone.Model.extend({
 
-		// Might want to switch settings depending on environment
-		env: 'dev',
+		// Can't see many advantages to having this in external JSON
+		defaults: {
+			pin: '12345',
+			crm: 'http://lexus.co.uk/crm/'
+		},
 
-		dev: { pin: '12345' },
-		production: { pin: '54321' },
-
-		getSetting: function(key) {
-			return this[this.env][key];
+		initialize: function() {
+			console.log('SettingsModel.intialize:');
 		}
 	});
 
-	return SettingsModel;
+	// NB. we return an instance in this case
+	return new SettingsModel();
 });
