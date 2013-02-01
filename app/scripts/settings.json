@@ -1,0 +1,26 @@
+{
+	"pin": "12345",
+	"dbName": "com.amaze.lexus.events",
+	"crmService": "http://lexus.co.uk/crm.aspx",
+	"dealerService": "http://lexus.co.uk/dealer.aspx",
+	"addressService": "http://lexus.co.uk/address.aspx",
+	"validationRules": {
+		"email": ["email"],
+		"post": ["firstName", "lastName", "house", "address", "town", "postcode"],
+		"drive": ["telephone", "dealer"]
+	},
+	"selectionRules": {
+		"post": 2,
+		"drive": 1
+	},
+	"models": [
+		{ "id": "12345", "name": "IS", "strap": "It's a car!" },
+		{ "id": "54321", "name": "GS", "strap": "It's another car!" },
+		{ "id": "32145", "name": "RX", "strap": "It's a really big car!" }
+	],
+	"dealers": [
+		{ "id": "12345", "name": "Battersea" },
+		{ "id": "54321", "name": "Belfast" },
+		{ "id": "32145", "name": "Auchtermuchty" }
+	]
+}
