@@ -14,11 +14,13 @@ define([
 	'views/login-view',
 	'views/admin-view',
 	'views/component-view',
-	'views/dialog-view', 
-	'views/toolbar-view'
+	'views/dialog-view',
+	'views/toolbar-view', 
+
+	'models/settings-model'
 ],
 
-function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, ComponentView, DialogView, ToolbarView) {
+function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, ComponentView, DialogView, ToolbarView, settingsModel) {
 
 	'use strict';
 
@@ -28,17 +30,20 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 
 			console.log('Controller.handleIndexRoute:');
 			
+			settingsModel.fetch({
+				success: _.bind(this.handleLoginRoute, this)
+			});
+
 			// We'll always want to go straight to log-in on startup
-			this.handleLoginRoute();
+			// this.handleLoginRoute();
 		},
 
 		handleLoginRoute: function() {
 
-			console.log('Controller.handleLoginRoute:');
+			console.log('Controller.handleLoginRoute: ' + settingsModel.get('pin'));
 
 			App.header.show(new ToolbarView());
 			App.content.show(new LoginView());
-			App.footer.show(new ToolbarView());
 		},
 
 		handleAdminRoute: function() {

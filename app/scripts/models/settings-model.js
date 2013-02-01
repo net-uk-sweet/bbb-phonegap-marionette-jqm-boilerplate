@@ -13,17 +13,9 @@ function(App, Backbone) {
 
 	var SettingsModel = Backbone.Model.extend({
 
-		// Can't see many advantages to having this in external JSON
-		defaults: {
-			pin: '12345',
-			crm: 'http://lexus.co.uk/crm/'
-		},
-
-		initialize: function() {
-			console.log('SettingsModel.intialize:');
-		}
+		url: 'scripts/settings.json'
 	});
 
-	// NB. we return an instance in this case
+	// NB. return an instance to ensure a single instance is used by all
 	return new SettingsModel();
 });

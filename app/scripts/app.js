@@ -38,8 +38,7 @@ function($, _, Backbone, Marionette) {
     // Add the main regions
     App.addRegions({
       header: '#header',
-      content: '#content',
-      footer: '#footer'
+      content: '#content'
     });
   };
 

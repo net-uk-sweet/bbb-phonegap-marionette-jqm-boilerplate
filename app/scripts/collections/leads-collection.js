@@ -7,12 +7,13 @@ define([
 
 	// models
 	'models/lead-model',
+	'models/settings-model',
 
 	// components
 	'plugins/backbone-websql'
 ],
 
-function(App, Backbone, LeadModel) {
+function(App, Backbone, LeadModel, settingsModel) {
 	
 	'use strict';
 
@@ -22,6 +23,10 @@ function(App, Backbone, LeadModel) {
 
 		initialize: function() {
 
+			var dbName = settingsModel.get('dbName');
+
+			console.log('LeadsList.initialize: ' + dbName);
+
 			/*
 			* Create and open a database. If it doesn't exist, API will create it for us.
 			* No need to worry about closing the resource when we're finished with it.
@@ -30,14 +35,15 @@ function(App, Backbone, LeadModel) {
 			* @version		version number of database (webkit implementation broken, but required to create / open)
 			* @description	description of database
 			* @size			estimated size of database (5mb the arbitrary limit before user prompted to expand)
-			* @success		success callback
 			*/
-			// Set a massive db limit to test on device for expected prompt
-			var db = openDatabase('com.amaze.helloBackbone', '1.0', 'Lexus customer leads', 1000 * 1024 * 1024);
+			var db = openDatabase(dbName, '1.0', 'Lexus customer leads', 5 * 1024 * 1024);
+
 			// var db = openDatabase('com.amaze.helloBackbone', '1.0', 'Lexus customer leads', 5 * 1024 * 1024);
 
+			console.log('LeadsList.initialized: ' + db);
+
 			// Pass db resource to WebSQLStore class and use table leads
-			this.store = new WebSQLStore(db, 'leads');
+			this.store = new WebSQLStore(db, 'customers');
 		},
 
 		sync: function(method, model, options) {
