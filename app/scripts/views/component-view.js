@@ -11,22 +11,14 @@ define([
 	'text!templates/component.html'
 ],
 
-function($, _, Backbone, App, componentTemplate) {
+function($, _, Backbone, App, template) {
 
 	'use strict';
 
 	var ComponentView = Backbone.Marionette.ItemView.extend({
 
-		// Add the attributes JQM expects to the view's element
-		attributes: function() {
-			return {
-				'data-url': 'component',
-				'data-role': 'page'
-			};
-		},
-
 		// Resolves to component.html in templates directory
-		template: _.template(componentTemplate),
+		template: _.template(template),
 
 		// Map events from view's element (this.el) to view handlers
 		events: {

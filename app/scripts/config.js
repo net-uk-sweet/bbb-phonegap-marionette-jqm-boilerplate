@@ -7,7 +7,7 @@ require.config({
   paths: {
     // JavaScript folders.
     libs: '../scripts/libs',
-    plugins: '../scripts/plugins', // Amaze and 3rd party plugins / components
+    plugins: '../scripts/plugins', // Ours or 3rd party plugins / components
 
     // Libraries.
     jquery: '../scripts/libs/jquery', // 1.9.0

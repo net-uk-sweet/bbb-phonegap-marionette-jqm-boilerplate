@@ -8,16 +8,16 @@ define([
 	'app',
 
 	// templates
-	'text!templates/lead.html'
+	'text!templates/local-storage.html'
 ],
 
-function($, _, Backbone, App, leadTemplate) {
+function($, _, Backbone, App, template) {
 
 	'use strict';
 
-	var LeadView = Backbone.Marionette.ItemView.extend({
+	var LocalStorageView = Backbone.Marionette.ItemView.extend({
 
-		template: _.template(leadTemplate),
+		template: _.template(template),
 
 		events: {
 			'click button': 'handleDelete'
@@ -30,9 +30,9 @@ function($, _, Backbone, App, leadTemplate) {
 		onClose: function() {
 
 			// This lets us know the view is being cleaned up
-			console.log('LeadView.onClose');
+			console.log('LocalStorageView.onClose');
 		}
 	});
 
-	return LeadView;
+	return LocalStorageView;
 });

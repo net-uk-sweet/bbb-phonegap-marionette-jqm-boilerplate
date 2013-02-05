@@ -6,19 +6,20 @@ define([
 	'backbone',
 
 	// models
-	'models/lead-model',
+	'models/local-storage-model',
+	'models/settings-model',
 
-	// components
+	// plugins
 	'plugins/backbone-websql'
 ],
 
-function(App, Backbone, LeadModel) {
+function(App, Backbone, LocalStorageModel, settingsModel) {
 	
 	'use strict';
 
-	var LeadsList = Backbone.Collection.extend({
+	var LocalStorageCollection = Backbone.Collection.extend({
 
-		model: LeadModel,
+		model: LocalStorageModel,
 
 		initialize: function() {
 
@@ -30,14 +31,16 @@ function(App, Backbone, LeadModel) {
 			* @version		version number of database (webkit implementation broken, but required to create / open)
 			* @description	description of database
 			* @size			estimated size of database (5mb the arbitrary limit before user prompted to expand)
-			* @success		success callback
 			*/
-			// Set a massive db limit to test on device for expected prompt
-			var db = openDatabase('com.amaze.helloBackbone', '1.0', 'Lexus customer leads', 1000 * 1024 * 1024);
-			// var db = openDatabase('com.amaze.helloBackbone', '1.0', 'Lexus customer leads', 5 * 1024 * 1024);
+			var db = openDatabase(settingsModel.get('dbName'), '1.0', 'Test database', 5 * 1024 * 1024);
 
 			// Pass db resource to WebSQLStore class and use table leads
-			this.store = new WebSQLStore(db, 'leads');
+			this.store = new WebSQLStore(db, 'test');
+		},
+
+		// Use LocalStorage sync method set up in backbone-websql plugin
+		sync: function(method, model, options) {
+			return Backbone.LocalStorage.sync(method, model, options);
 		},
 
 		// Override Backbone.Collection's default reset method to ensure that
@@ -54,6 +57,6 @@ function(App, Backbone, LeadModel) {
 		},
 	});
 
-	return LeadsList;
+	return LocalStorageCollection;
 
 });

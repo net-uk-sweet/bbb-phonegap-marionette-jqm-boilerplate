@@ -7,17 +7,19 @@ define([
 	'marionette',
 	'app',
 
-	// Collections
-	'collections/leads-collection',
+	// Models
+	'models/local-storage-model',
 
 	// Views
+	'views/toolbar-view',
+	'views/page-view',
 	'views/login-view',
 	'views/admin-view',
 	'views/component-view',
 	'views/dialog-view'
 ],
 
-function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, ComponentView, DialogView) {
+function($, _, Backbone, Marionette, App, LocalStorageModel, ToolbarView, PageView, LoginView, AdminView, ComponentView, DialogView) {
 
 	'use strict';
 
@@ -35,36 +37,45 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 
 			console.log('Controller.handleLoginRoute:');
 
-			// It's really just nav at the moment
-			this.changeView(new LoginView());
+			// Repetition could be avoided here by creating further abstract
+			// classes based on the PageView class. These could handle population
+			// of the header and footer regions which may not change from page
+			// to page.
+
+			this.changeView(new PageView({
+				header: new ToolbarView({ url: 'login' }),
+				content: new LoginView()
+			}));
 		},
 
 		handleAdminRoute: function() {
 
 			console.log('Controller.handleAdminRoute:');
 
-			// Fetch the leads list from local storage (webSQL)
-			var that = this;
-			var leadsList = new LeadsList();
-			leadsList.fetch({
-				// TODO: use bind here to avoid callback scope silliness
-				success: function(collection) {
-					that.changeView(new AdminView({ collection: collection }));
-				}
-			});
+			this.changeView(new PageView({
+				header: new ToolbarView({ url: 'admin' }),
+				content: new AdminView({
+					collection: App.collections.localStorageCollection
+				})
+			}));
 		},
 
 		handleComponentRoute: function() {
 
 			console.log('Controller.handleComponentRoute:');
 
-			this.changeView(new ComponentView());
+			this.changeView(new PageView({
+				header: new ToolbarView({ url: 'component' }),
+				content: new ComponentView()
+			}));
 		},
 
 		handleDialogRoute: function() {
 
 			console.log('Controller.handleDialogRoute:');
 
+			// TODO: need to abstract DialogView creation as we have with standard pages
+			// TODO: fix routing with dialogs on close (currently resets to index route)
 			this.changeView(new DialogView(), 'pop');
 		},
 
@@ -72,8 +83,8 @@ function($, _, Backbone, Marionette, App, LeadsList, LoginView, AdminView, Compo
 	        
 	        var $el = view.$el;
 
-	        App.outgoing = App.incoming;
-	        App.incoming = view;
+	        App.views.outgoing = App.views.incoming;
+	        App.views.incoming = view;
 
 	        view.render();
 	        $('body').append($el);

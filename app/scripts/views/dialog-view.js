@@ -11,7 +11,7 @@ define([
 	'text!templates/dialog.html'
 ],
 
-function($, _, Backbone, App, dialogTemplate) {
+function($, _, Backbone, App, template) {
 
 	'use strict';
 
@@ -20,13 +20,13 @@ function($, _, Backbone, App, dialogTemplate) {
 		// Add the attributes JQM expects to the view's element
 		attributes: function() {
 			return {
-				'data-url': 'login',
+				'data-url': 'dialog',
 				'data-role': 'dialog'
 			};
 		},
 
 		// Resolves to dialog.html in templates directory
-		template: _.template(dialogTemplate),
+		template: _.template(template),
 
 		// Map events from view's element (this.el) to view handlers
 		events: {

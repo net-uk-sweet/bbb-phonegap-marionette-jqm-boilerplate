@@ -3,10 +3,7 @@ define([
   // Libraries
   'backbone',
   'marionette',
-  'controller',
-
-  // Collections
-  'collections/leads-collection'
+  'controller'
 ],
 
 function(Backbone, Marionette, controller) {

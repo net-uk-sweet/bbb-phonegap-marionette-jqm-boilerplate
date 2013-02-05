@@ -11,22 +11,14 @@ define([
 	'text!templates/login.html'
 ],
 
-function($, _, Backbone, App, loginTemplate) {
+function($, _, Backbone, App, template) {
 
 	'use strict';
 
 	var LoginView = Backbone.Marionette.ItemView.extend({
 
-		// Add the attributes JQM expects to the view's element
-		attributes: function() {
-			return {
-				'data-url': 'login',
-				'data-role': 'page'
-			};
-		},
-
 		// Resolves to login.html in templates directory
-		template: _.template(loginTemplate),
+		template: _.template(template),
 
 		// Map events from view's element (this.el) to view handlers
 		events: {

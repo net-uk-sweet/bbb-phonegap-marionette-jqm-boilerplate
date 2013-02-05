@@ -8,28 +8,20 @@ define([
 	'app',
 
 	// Views
-	'views/leads-view',
+	'views/local-storage-collection-view',
 
 	// Templates
 	'text!templates/admin.html'
 ],
 
-function($, _, Backbone, App, LeadsView, adminTemplate) {
+function($, _, Backbone, App, LocalStorageCollectionView, template) {
 
 	'use strict';
 
 	var AdminView = Backbone.Marionette.Layout.extend({
 
-		// Add attributes JQM expects
-		attributes: function() {
-			return {
-				'data-url': 'admin',
-				'data-role': 'page'
-			};
-		},
-
 		// Resolves to admin.html in templates directory
-		template: _.template(adminTemplate),
+		template: _.template(template),
 
 		regions: {
 			// Subviews can target these regions of the template
@@ -54,7 +46,7 @@ function($, _, Backbone, App, LeadsView, adminTemplate) {
 			console.log('AdminView.onRender:');
 
 			this.leads.show(
-				new LeadsView({
+				new LocalStorageCollectionView({
 					collection: this.collection
 				})
 			);

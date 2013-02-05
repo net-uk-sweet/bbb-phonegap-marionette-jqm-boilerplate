@@ -106,7 +106,9 @@ _.extend(WebSQLStore.prototype,{
 
 // ====== [ Backbone.sync WebSQL implementation ] ======
 
-Backbone.sync = function (method, model, options) {
+// IW. create a namespace to contain the overridden Backbone.sync method
+Backbone.LocalStorage = {};
+Backbone.LocalStorage.sync = function (method, model, options) {
 	var store = model.store || model.collection.store, success, error;
 	if (store == null) {
 		window.console.warn("[BACKBONE-WEBSQL] model without store object -> ", model);
