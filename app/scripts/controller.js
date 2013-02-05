@@ -79,6 +79,8 @@ function($, _, Backbone, Marionette, App, LocalStorageModel, ToolbarView, PageVi
 			this.changeView(new DialogView(), 'pop');
 		},
 
+		// Based on the following example from Christophe Coenraets:
+		// http://coenraets.org/blog/2012/03/using-backbone-js-with-jquery-mobile/
 	    changeView: function(view, transition) {
 	        
 	        var $el = view.$el;
